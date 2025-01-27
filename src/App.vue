@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+
+// 你可以在这里添加更多的逻辑或状态
 </script>
 
 <template>
@@ -10,8 +12,9 @@ import HelloWorld from './components/HelloWorld.vue'
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
+    <!-- 添加更多的组件或内容 -->
+    <HelloWorld msg="欢迎使用 Vite + Vue!" />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
