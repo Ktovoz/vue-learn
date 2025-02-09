@@ -1,279 +1,254 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElTimeline, ElTimelineItem, ElStatistic, ElNotification } from 'element-plus'
-import { Calendar, Star, Trophy } from '@element-plus/icons-vue'
-
-const stats = [
-  { number: 1000, label: '用户数量', prefix: '+' },
-  { number: 50, label: '企业客户', prefix: '+' },
-  { number: 99.9, label: '正常运行时间', suffix: '%' }
-]
-
-const showNotification = () => {
-  ElNotification({
-    title: '欢迎加入',
-    message: '感谢您的关注，我们会尽快与您联系！',
-    type: 'success',
-    duration: 3000
-  })
-}
-
-const milestones = [
-  { timestamp: '2024 Q1', title: '产品发布', content: '正式版本发布', icon: Star },
-  { timestamp: '2024 Q2', title: '功能升级', content: '新增多个核心功能', icon: Trophy },
-  { timestamp: '2024 Q3', title: '全球化', content: '支持多语言和本地化', icon: Calendar }
-]
+import { ElCard, ElSteps, ElStep, ElIcon } from 'element-plus'
+import { Connection, Select, Monitor } from '@element-plus/icons-vue'
 </script>
 
 <template>
-  <div class="final-page">
-    <div class="content-wrapper">
-      <div class="stats-section">
-        <div v-for="(stat, index) in stats" 
-             :key="index" 
-             class="stat-item">
-          <el-statistic 
-            :value="stat.number"
-            :prefix="stat.prefix"
-            :suffix="stat.suffix"
-            :value-style="{ color: '#fff', fontSize: '2.5rem' }"
-            :title="stat.label"/>
-        </div>
+  <div class="page-background">
+    <h1 class="fixed-title">阶段一：环境自适应runner改进</h1>
+    <div class="content-container">
+      <div class="geometric-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
       </div>
-
-      <div class="timeline-section">
-        <el-timeline>
-          <el-timeline-item
-            v-for="(milestone, index) in milestones"
-            :key="index"
-            :timestamp="milestone.timestamp"
-            :type="index === 0 ? 'danger' : 'info'"
-            placement="top">
-            <el-card>
-              <template #header>
-                <div class="milestone-header">
-                  <el-icon><component :is="milestone.icon" /></el-icon>
-                  <span>{{ milestone.title }}</span>
-                </div>
-              </template>
-              {{ milestone.content }}
-            </el-card>
-          </el-timeline-item>
-        </el-timeline>
-      </div>
-
-      <div class="cta-section">
-        <h2>准备好开始了吗？</h2>
-        <p>加入我们，开启创新之旅</p>
-        <div class="buttons">
-          <el-button type="danger" size="large" @click="showNotification">
-            立即开始
-          </el-button>
-          <el-button type="info" size="large" plain>
-            了解更多
-          </el-button>
-        </div>
-      </div>
-    </div>
-
-    <div class="geometric-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.final-page {
+.page-background {
+  width: 100%;
   min-height: 100vh;
-  width: 100vw;
-  background: #1a1a1a;
-  color: white;
   position: relative;
-  overflow: hidden;
 }
 
-.content-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  padding: 2rem;
-  gap: 1.5rem;
-}
-
-.stats-section {
-  display: flex;
-  gap: clamp(1rem, 3vw, 4rem);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 4rem);
-  width: 100%;
-  max-width: 1200px;
-}
-
-.stat-item {
-  text-align: center;
-  position: relative;
-  flex: 1;
-  &::after {
-    content: '';
-    position: absolute;
-    right: -0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-  }
-  &:last-child::after {
-    display: none;
-  }
-}
-
-:deep(.el-statistic__title) {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  margin-top: 0.5rem;
-}
-
-:deep(.el-statistic__content) {
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem) !important;
-}
-
-.timeline-section {
-  width: 100%;
-  max-width: 1000px;
-  padding: clamp(1rem, 2vw, 2rem);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  margin: 0 auto;
-}
-
-:deep(.el-timeline) {
-  padding-bottom: 0;
-}
-
-:deep(.el-timeline-item:last-child) {
-  padding-bottom: 0;
-}
-
-:deep(.el-card) {
-  --el-card-padding: 1rem;
-}
-
-.milestone-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #ff6b6b;
-  font-weight: 500;
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-}
-
-.cta-section {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: clamp(1.5rem, 3vw, 3rem);
-  width: 100%;
-  max-width: 1000px;
-}
-
-h2 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  margin: 0;
-  margin-bottom: 0.5rem;
+.fixed-title {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  font-size: 3rem;
   background: linear-gradient(45deg, #ff6b6b, #feca57);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.cta-section p {
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  margin: 0.5rem 0;
-  color: rgba(255, 255, 255, 0.8);
+.content-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.buttons {
+.hero-section {
+  width: 100%;
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2rem;
+}
+
+.roadmap-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
   justify-content: center;
+  width: 100%;
+  position: relative;
+  gap: 3.5rem;
+  margin-top: 2rem;
 }
 
-:deep(.el-button.el-button--large) {
-  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.5rem, 2vw, 2rem);
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
+.timeline-item {
+  flex: 1;
+  max-width: 400px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  gap: 1.5rem;
 }
 
-.geometric-shapes .shape {
+.timeline-header {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 152, 219, 0.95));
+  border-radius: 16px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.timeline-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(52, 152, 219, 0.3);
+}
+
+.timeline-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.timeline-icon:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.timeline-icon :deep(.el-icon) {
+  font-size: 1.6rem;
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.timeline-title {
+  flex: 1;
+  text-align: left;
+}
+
+.timeline-title h3 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: #fff;
+  margin: 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #fff, #e6e6e6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.02em;
+  padding-bottom: 0.2rem;
+}
+
+.timeline-content {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.8rem;
+  backdrop-filter: blur(12px);
+  min-height: 100px;
+  display: flex;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.timeline-content::before {
+  content: '';
   position: absolute;
-  opacity: 0.1;
-  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
-.shape-1 {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  top: -150px;
-  right: -150px;
-  filter: blur(60px);
-}
-
-.shape-2 {
-  width: 200px;
-  height: 200px;
-  transform: rotate(45deg);
-  bottom: -100px;
-  left: -100px;
-  filter: blur(60px);
-}
-
-.shape-3 {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+.timeline-item:not(:last-child) .timeline-header::after {
+  content: '';
+  position: absolute;
+  right: -3.5rem;
   top: 50%;
-  left: 10%;
-  filter: blur(60px);
+  width: 3.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  transform: translateY(-50%);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
-:deep(.el-button--info) {
-  &.is-plain {
-    border-color: rgba(255, 255, 255, 0.2);
-    &:hover {
-      border-color: #ff6b6b;
-      color: #ff6b6b;
-    }
+.timeline-item.completed:not(:last-child) .timeline-header::after {
+  background: linear-gradient(90deg, 
+    rgba(46, 204, 113, 0.4),
+    rgba(46, 204, 113, 0.1)
+  );
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
+}
+
+.timeline-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.015em;
+  font-weight: 400;
+  text-align: left;
+}
+
+.step-details {
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.detail-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 }
 
-:deep(.el-timeline-item__content) {
-  color: #fff;
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #ff6b6b;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  
+  .el-icon {
+    font-size: 1.4em;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
-:deep(.el-card) {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  color: #fff;
-}
-
-:deep(.el-card__header) {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-:deep(.el-timeline-item__timestamp) {
-  color: rgba(255, 255, 255, 0.8);
+.step-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 :deep(.el-button) {
@@ -281,25 +256,135 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
   transition: all 0.3s ease;
-  &:hover {
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.5rem, 2vw, 2rem);
+  &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
   }
-  &.el-button--danger {
+  &.el-button--primary {
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border: none;
-    &:hover {
+    &:hover:not(:disabled) {
       opacity: 0.9;
-      transform: translateY(-2px);
     }
   }
-  &.el-button--info.is-plain {
-    border-color: rgba(255, 255, 255, 0.2);
-    &:hover {
-      border-color: #ff6b6b;
-      color: #ff6b6b;
-      transform: translateY(-2px);
-    }
+  &:disabled {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.3);
   }
 }
-</style> 
+
+.geometric-shapes .shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 107, 107, 0.2);
+  top: -150px;
+  right: -150px;
+  opacity: 0.6;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(254, 202, 87, 0.2);
+  bottom: -150px;
+  left: -150px;
+  opacity: 0.6;
+}
+
+.shape-3 {
+  width: 600px;
+  height: 600px;
+  background: rgba(255, 107, 107, 0.05);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+@media (max-width: 1400px) {
+  .timeline-item {
+    max-width: 350px;
+    min-width: 300px;
+  }
+  
+  .timeline-title h3 {
+    font-size: 1.3rem;
+  }
+  
+  .timeline-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .timeline-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 1rem;
+  }
+
+  .timeline-item {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .timeline-item:not(:last-child) .timeline-header::after {
+    right: 50%;
+    top: auto;
+    bottom: -2rem;
+    width: 3px;
+    height: 2rem;
+    transform: translateX(50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    gap: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .timeline-item {
+    min-width: unset;
+  }
+
+  .timeline-header {
+    padding: 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .timeline-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .timeline-title h3 {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .timeline-content {
+    padding: 1.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+</style>

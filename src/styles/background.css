@@ -1,0 +1,53 @@
+.page-background {
+  min-height: 100vh;
+  width: 100vw;
+  background: #1a1a1a;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.geometric-shapes .shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 107, 107, 0.2);
+  top: -150px;
+  right: -150px;
+  opacity: 0.6;
+}
+
+.shape-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(254, 202, 87, 0.2);
+  bottom: -150px;
+  left: -150px;
+  opacity: 0.6;
+}
+
+.shape-3 {
+  width: 600px;
+  height: 600px;
+  background: rgba(255, 107, 107, 0.05);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(100px);
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .page-background {
+    padding: 1rem;
+  }
+} 

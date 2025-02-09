@@ -3,24 +3,24 @@ import { ElCard, ElSteps, ElStep, ElIcon } from 'element-plus'
 import { Connection, Select, Monitor } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
-const positionX = ref(300)
-const positionY = ref(200)
+const positionX = ref(350)
+const positionY = ref(220)
 
 const steps = [
   {
-    title: '环境自适应runner改进',
+    title: '阶段一：环境自适应runner改进',
     icon: Connection,
     description: '优化runner的运行环境识别与适配，可以合并多个分支，提升维护效率以及框架的智能化',
     status: 'success'
   },
   {
-    title: '测试用例精准挑选与运行',
+    title: '阶段二：测试用例精准挑选与运行',
     icon: Select,
     description: '智能化测试用例筛选，提高使用便捷性',
     status: 'success'
   },
   {
-    title: 'Web GUI服务集成[待定]',
+    title: '阶段三：Web GUI服务集成[待定]',
     icon: Monitor,
     description: '可视化操作界面，简化使用流程',
     status: 'success'
@@ -29,14 +29,14 @@ const steps = [
 </script>
 
 <template>
-  <div class="landing-page">
+  <div class="page-background">
     <div class="content-container" :style="{ 
       position: 'absolute',
       top: `${positionY}px`,
       left: `${positionX}px`
     }">
       <div class="hero-section">
-        <h1>API框架改进计划</h1>
+        <h1>API框架优化Roadmap</h1>
         <div class="tagline">进一步提升维护效率，提高框架智能化</div>
 
         <div class="roadmap-section">
@@ -75,21 +75,9 @@ const steps = [
 </template>
 
 <style scoped>
-.landing-page {
-  min-height: 100vh;
-  width: 100vw;
-  background: #1a1a1a;
-  color: white;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
 .content-container {
   position: relative;
+  z-index: 2;
 }
 
 .hero-section {
@@ -113,18 +101,20 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .tagline {
   font-size: 1.8rem;
-  color: #888;
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 0.5rem;
   letter-spacing: 0.02em;
   line-height: 1.4;
-  font-weight: 300;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .roadmap-section {
@@ -157,17 +147,17 @@ h1 {
 
 .timeline-header {
   width: 100%;
-  background: linear-gradient(135deg, #2C3E50, #3498DB);
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 152, 219, 0.95));
   border-radius: 16px;
   padding: 1.8rem;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   gap: 1.5rem;
-  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
   transition: all 0.3s ease;
 }
 
@@ -180,12 +170,12 @@ h1 {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
@@ -212,7 +202,7 @@ h1 {
   color: #fff;
   margin: 0;
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   background: linear-gradient(45deg, #fff, #e6e6e6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -222,8 +212,8 @@ h1 {
 
 .timeline-content {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 1.8rem;
   backdrop-filter: blur(12px);
@@ -231,7 +221,7 @@ h1 {
   display: flex;
   align-items: flex-start;
   transition: all 0.3s ease;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -256,19 +246,19 @@ h1 {
   width: 3.5rem;
   height: 2px;
   background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0.1)
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
   );
   transform: translateY(-50%);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .timeline-item.completed:not(:last-child) .timeline-header::after {
   background: linear-gradient(90deg, 
-    rgba(46, 204, 113, 0.6),
-    rgba(46, 204, 113, 0.2)
+    rgba(46, 204, 113, 0.4),
+    rgba(46, 204, 113, 0.1)
   );
-  box-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
 }
 
 .timeline-content p {
@@ -346,26 +336,38 @@ h1 {
 }
 
 .geometric-shapes .shape {
-  opacity: 0.05;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
 }
 
 .shape-1 {
-  width: 200px;
-  height: 200px;
-  top: -100px;
-  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 107, 107, 0.2);
+  top: -150px;
+  right: -150px;
+  opacity: 0.6;
 }
 
 .shape-2 {
-  width: 150px;
-  height: 150px;
-  bottom: -75px;
-  left: -75px;
+  width: 400px;
+  height: 400px;
+  background: rgba(254, 202, 87, 0.2);
+  bottom: -150px;
+  left: -150px;
+  opacity: 0.6;
 }
 
 .shape-3 {
-  width: 100px;
-  height: 100px;
+  width: 600px;
+  height: 600px;
+  background: rgba(255, 107, 107, 0.05);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(100px);
+  opacity: 0.3;
 }
 
 @media (max-width: 1400px) {
@@ -407,10 +409,6 @@ h1 {
 }
 
 @media (max-width: 768px) {
-  .landing-page {
-    padding: 1rem;
-  }
-
   .hero-section {
     gap: 1.5rem;
   }
