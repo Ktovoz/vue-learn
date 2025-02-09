@@ -47,7 +47,7 @@ const milestones = [
             v-for="(milestone, index) in milestones"
             :key="index"
             :timestamp="milestone.timestamp"
-            :type="index === 0 ? 'primary' : ''"
+            :type="index === 0 ? 'danger' : 'info'"
             placement="top">
             <el-card>
               <template #header>
@@ -86,50 +86,175 @@ const milestones = [
 
 <style scoped>
 .final-page {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  background: #1a1a1a;
   color: white;
   position: relative;
   overflow: hidden;
 }
 
 .content-wrapper {
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: relative;
   z-index: 2;
+  padding: 2rem;
+  gap: 1.5rem;
 }
 
 .stats-section {
   display: flex;
-  gap: 4rem;
-  margin-bottom: 4rem;
-  padding: 0 2rem;
+  gap: clamp(1rem, 3vw, 4rem);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: clamp(1rem, 2vw, 2rem) clamp(1.5rem, 3vw, 4rem);
+  width: 100%;
+  max-width: 1200px;
 }
 
 .stat-item {
   text-align: center;
+  position: relative;
+  flex: 1;
+  &::after {
+    content: '';
+    position: absolute;
+    right: -0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  &:last-child::after {
+    display: none;
+  }
+}
+
+:deep(.el-statistic__title) {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  margin-top: 0.5rem;
+}
+
+:deep(.el-statistic__content) {
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem) !important;
 }
 
 .timeline-section {
   width: 100%;
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 0 2rem;
+  max-width: 1000px;
+  padding: clamp(1rem, 2vw, 2rem);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin: 0 auto;
+}
+
+:deep(.el-timeline) {
+  padding-bottom: 0;
+}
+
+:deep(.el-timeline-item:last-child) {
+  padding-bottom: 0;
+}
+
+:deep(.el-card) {
+  --el-card-padding: 1rem;
 }
 
 .milestone-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #ff6b6b;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
-:deep(.el-timeline-item__node--normal) {
-  background-color: #e74c3c;
+.cta-section {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  width: 100%;
+  max-width: 1000px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin: 0;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta-section p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+:deep(.el-button.el-button--large) {
+  padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.5rem, 2vw, 2rem);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+.geometric-shapes .shape {
+  position: absolute;
+  opacity: 0.1;
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  top: -150px;
+  right: -150px;
+  filter: blur(60px);
+}
+
+.shape-2 {
+  width: 200px;
+  height: 200px;
+  transform: rotate(45deg);
+  bottom: -100px;
+  left: -100px;
+  filter: blur(60px);
+}
+
+.shape-3 {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  top: 50%;
+  left: 10%;
+  filter: blur(60px);
+}
+
+:deep(.el-button--info) {
+  &.is-plain {
+    border-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+    }
+  }
 }
 
 :deep(.el-timeline-item__content) {
@@ -137,8 +262,8 @@ const milestones = [
 }
 
 :deep(.el-card) {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   color: #fff;
 }
@@ -151,75 +276,30 @@ const milestones = [
   color: rgba(255, 255, 255, 0.8);
 }
 
-.cta-section {
-  text-align: center;
-}
-
-h2 {
-  font-size: 2.5rem;
-  margin: 0;
-  margin-bottom: 1rem;
-}
-
-.buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  border: none;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-}
-
-.primary {
-  background: #e74c3c;
+:deep(.el-button) {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
-}
-
-.secondary {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-}
-
-.geometric-shapes .shape {
-  position: absolute;
-  opacity: 0.1;
-}
-
-.shape-1 {
-  width: 300px;
-  height: 300px;
-  background: white;
-  border-radius: 50%;
-  top: -150px;
-  right: -150px;
-}
-
-.shape-2 {
-  width: 200px;
-  height: 200px;
-  background: white;
-  transform: rotate(45deg);
-  bottom: -100px;
-  left: -100px;
-}
-
-.shape-3 {
-  width: 150px;
-  height: 150px;
-  background: white;
-  border-radius: 50%;
-  top: 50%;
-  left: 10%;
+  transition: all 0.3s ease;
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  &.el-button--danger {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    border: none;
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  }
+  &.el-button--info.is-plain {
+    border-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+      transform: translateY(-2px);
+    }
+  }
 }
 </style> 
