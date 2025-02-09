@@ -1,16 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { ElCarousel, ElCarouselItem } from 'element-plus'
-import page1 from './components/1.vue'
-import page2 from './components/2.vue'
-import page3 from './components/3.vue'
+import type { Component } from 'vue'
 
-// 页面数组
-const pages = ref([
-  { component: page1 },
-  { component: page2 },
-  { component: page3 }
-])
+// 自动导入所有组件
+const modules = import.meta.glob<{ default: Component }>('./components/*.vue')
+
+// 组件数组
+const pages = ref<{ component: Component }[]>([])
+
+// 初始化组件
+Promise.all(
+  Object.entries(modules)
+    .sort(([a], [b]) => {
+      const numA = parseInt(a.match(/\/(\d+)\.vue$/)?.[1] || '0')
+      const numB = parseInt(b.match(/\/(\d+)\.vue$/)?.[1] || '0')
+      return numA - numB
+    })
+    .map(([_, importFn]) => importFn())
+).then((components) => {
+  pages.value = components.map(module => ({
+    component: module.default
+  }))
+})
 
 const autoplay = ref(false)
 const interval = ref(3000)
