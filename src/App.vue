@@ -25,7 +25,7 @@ Promise.all(
 })
 
 const autoplay = ref(false)
-const interval = ref(3000)
+const interval = ref(0)
 const carouselRef = ref()
 const currentIndex = ref(0)
 
@@ -73,7 +73,8 @@ onMounted(() => {
       indicator-position="outside"
       direction="vertical"
       :loop="true"
-      @change="handleChange">
+      @change="handleChange"
+      arrow="never">
       <el-carousel-item v-for="(page, index) in pages" :key="index">
         <component :is="page.component" />
       </el-carousel-item>
@@ -156,16 +157,53 @@ onMounted(() => {
   background-color: #409eff;
 }
 
-/* 添加页面切换动画 */
+/* 添加过渡动画 */
 :deep(.el-carousel__item) {
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-:deep(.el-carousel__item--card) {
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+  height: 100vh !important;
   transform: translateY(0);
 }
 
-:deep(.el-carousel__item--card.is-active) {
+:deep(.el-carousel__item.is-active) {
   transform: translateY(0);
+}
+
+:deep(.el-carousel__item.is-animating) {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 添加滑动方向的过渡效果 */
+:deep(.el-carousel__item.el-carousel__item--card) {
+  transform: translateY(100%);
+}
+
+:deep(.el-carousel__item.el-carousel__item--card.is-in-stage) {
+  transform: translateY(0);
+}
+
+:deep(.el-carousel__container) {
+  height: 100%;
+}
+
+/* 消除轮播容器的间隙 */
+:deep(.el-carousel) {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+:deep(.el-carousel__container) {
+  margin: 0;
+  padding: 0;
+}
+
+/* 确保组件内容填满整个轮播项 */
+:deep(.el-carousel__item > *) {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 </style>
