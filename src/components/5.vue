@@ -1,102 +1,54 @@
 <script setup lang="ts">
-import { ElCard, ElSteps, ElStep, ElIcon } from 'element-plus'
-import { Connection, Select, Monitor } from '@element-plus/icons-vue'
-import { ref } from 'vue'
-
-const positionX = ref(350)
-const positionY = ref(220)
-
-const steps = [
-  {
-    title: '阶段一：环境自适应runner改进',
-    icon: Connection,
-    description: '优化runner的运行环境识别与适配，可以合并多个分支，提升维护效率以及框架的智能化',
-    status: 'success'
-  },
-  {
-    title: '阶段二：测试用例精准挑选与运行',
-    icon: Select,
-    description: '智能化测试用例筛选，提高使用便捷性',
-    status: 'success'
-  },
-  {
-    title: '阶段三：Web GUI服务集成[待定]',
-    icon: Monitor,
-    description: '可视化操作界面，简化使用流程',
-    status: 'success'
-  }
-]
+import {ElCard, ElCol, ElDivider, ElIcon, ElRow} from 'element-plus'
+import {Document, Edit} from '@element-plus/icons-vue'
 </script>
 
 <template>
   <div class="page-background">
-    <div class="content-container" :style="{ 
-      position: 'absolute',
-      top: `${positionY}px`,
-      left: `${positionX}px`
-    }">
-      <div class="hero-section">
-        <h1>API框架优化计划</h1>
-        <div class="tagline">进一步提升维护效率，提高框架智能化</div>
-
-        <div class="roadmap-section">
-          <div class="timeline-container">
-            <div 
-              v-for="(step, index) in steps" 
-              :key="index"
-              class="timeline-item"
-              :class="{ 'completed': step.status === 'success' }"
-            >
-              <div class="timeline-header">
-                <div class="timeline-icon">
-                  <el-icon>
-                    <component :is="step.icon" />
-                  </el-icon>
-                </div>
-                <div class="timeline-title">
-                  <h3>{{ step.title }}</h3>
-                </div>
-              </div>
-              <div class="timeline-content">
-                <p>{{ step.description }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <h1 class="fixed-title">阶段三：Web GUI服务集成[待定]</h1>
+    <div class="content-container">
       <div class="geometric-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
+      </div>
+
+      <div class="main-content">
+        <el-card class="description-card">
+          <template #header>
+            <div class="card-header">
+              <el-icon>
+                <Edit/>
+              </el-icon>
+              <span>说明</span>
+            </div>
+          </template>
+          <div class="description-content">
+            <h3>Roadmap：</h3>
+            <ol>
+              <li>集成spring boot做成前后端分离，把启动命令和操作界面解耦</li>
+              <li>前端前期可以使用简单的html静态文件，重点放在后端的启动测试逻辑上</li>
+              <li>后期可以做成测试平台入口，集成中台功能提供更复杂的测试功能满足其他测试需求</li>
+            </ol>
+          </div>
+        </el-card>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.content-container {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-section {
-  min-height: auto;
+.page-background {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  min-height: 100vh;
   position: relative;
-  z-index: 2;
-  gap: 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
-h1 {
-  font-size: 4rem;
+.fixed-title {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  font-size: 3rem;
   background: linear-gradient(45deg, #ff6b6b, #feca57);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -105,16 +57,25 @@ h1 {
   letter-spacing: -0.02em;
   line-height: 1.2;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.tagline {
-  font-size: 1.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 0.5rem;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
-  font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.content-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2rem;
 }
 
 .roadmap-section {
@@ -225,18 +186,19 @@ h1 {
   position: relative;
 }
 
-.timeline-content::before {
+.timeline-header::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 16px;
   padding: 1px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)); /* 修改为单个渐变 */
+  mask: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)); /* 同样修改为单个渐变 */
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
+
 
 .timeline-item:not(:last-child) .timeline-header::after {
   content: '';
@@ -245,18 +207,18 @@ h1 {
   top: 50%;
   width: 3.5rem;
   height: 2px;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.05)
+  background: linear-gradient(90deg,
+  rgba(255, 255, 255, 0.2),
+  rgba(255, 255, 255, 0.05)
   );
   transform: translateY(-50%);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .timeline-item.completed:not(:last-child) .timeline-header::after {
-  background: linear-gradient(90deg, 
-    rgba(46, 204, 113, 0.4),
-    rgba(46, 204, 113, 0.1)
+  background: linear-gradient(90deg,
+  rgba(46, 204, 113, 0.4),
+  rgba(46, 204, 113, 0.1)
   );
   box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
 }
@@ -283,7 +245,7 @@ h1 {
   color: #fff;
   transition: all 0.3s ease;
   transform: translateY(0);
-  
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -296,7 +258,7 @@ h1 {
   gap: 0.8rem;
   color: #ff6b6b;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
-  
+
   .el-icon {
     font-size: 1.4em;
     background: linear-gradient(45deg, #ff6b6b, #feca57);
@@ -317,17 +279,21 @@ h1 {
   color: white;
   transition: all 0.3s ease;
   padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.5rem, 2vw, 2rem);
+
   &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
   }
+
   &.el-button--primary {
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border: none;
+
     &:hover:not(:disabled) {
       opacity: 0.9;
     }
   }
+
   &:disabled {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
@@ -375,11 +341,11 @@ h1 {
     max-width: 350px;
     min-width: 300px;
   }
-  
+
   .timeline-title h3 {
     font-size: 1.3rem;
   }
-  
+
   .timeline-content p {
     font-size: 1rem;
   }
@@ -418,12 +384,6 @@ h1 {
     letter-spacing: -0.01em;
   }
 
-  .tagline {
-    font-size: 1.2rem;
-    letter-spacing: 0.01em;
-    margin-top: 0.3rem;
-  }
-
   .timeline-item {
     min-width: unset;
   }
@@ -451,6 +411,147 @@ h1 {
   .timeline-content p {
     font-size: 1rem;
     line-height: 1.7;
+  }
+
+  .main-content {
+    padding: 180px 20px 20px;
+  }
+}
+
+.main-content {
+  padding: 280px 40px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-row {
+  margin-top: 2rem;
+}
+
+.description-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.description-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 1.2rem 0;
+}
+
+.description-content {
+  color: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+}
+
+.description-content h3 {
+  color: #ff6b6b;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.description-content ol {
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.description-content li {
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.code-content pre {
+  margin: 0;
+  padding: 1.5rem;
+  background: rgba(30, 30, 30, 0.95);
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.code-content code {
+  color: #e6e6e6;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: block;
+}
+
+/* 代码高亮 */
+.code-content .keyword {
+  color: #569cd6;
+}
+
+.code-content .string {
+  color: #ce9178;
+}
+
+.code-content .comment {
+  color: #6a9955;
+}
+
+.code-content .type {
+  color: #4ec9b0;
+}
+
+.code-content .function {
+  color: #dcdcaa;
+}
+
+.code-card {
+  background: rgba(40, 44, 52, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+}
+
+.code-card :deep(.el-card__header) {
+  background: rgba(30, 30, 30, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-card .card-header {
+  color: #e6e6e6;
+}
+
+.code-card .card-header :deep(.el-icon) {
+  font-size: 1.2em;
+  margin-right: 8px;
+  background: linear-gradient(45deg, #61afef, #56b6c2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .content-row {
+    flex-direction: column;
+  }
+
+  .el-col {
+    width: 100% !important;
+    margin-bottom: 2rem;
   }
 }
 </style>

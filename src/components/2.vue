@@ -1,59 +1,35 @@
 <script setup lang="ts">
 import { ElCard, ElImage, ElDivider, ElTimeline, ElTimelineItem, ElCollapse, ElCollapseItem } from 'element-plus'
 
-// 假设这些是示例图片URL，实际使用时需要替换为真实的图片路径
-const statusImages = [
-  'https://img10.360buyimg.com/ddimg/jfs/t1/252618/28/17732/57667/67a0e98dF0534eed4/0ade58e461ce4d78.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/259561/27/17874/54054/67a7ab6cF9dae3b7d/c2afc0af82ea87b5.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/260616/30/2415/41024/676a52aeF155b4d60/f2ea3f6b73f26e20.jpg',
-  'https://img10.360buyimg.com/ddimg/jfs/t1/252618/28/17732/57667/67a0e98dF0534eed4/0ade58e461ce4d78.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/259561/27/17874/54054/67a7ab6cF9dae3b7d/c2afc0af82ea87b5.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/260616/30/2415/41024/676a52aeF155b4d60/f2ea3f6b73f26e20.jpg',
-  'https://img10.360buyimg.com/ddimg/jfs/t1/252618/28/17732/57667/67a0e98dF0534eed4/0ade58e461ce4d78.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/259561/27/17874/54054/67a7ab6cF9dae3b7d/c2afc0af82ea87b5.jpg',
-  'https://img14.360buyimg.com/ddimg/jfs/t1/260616/30/2415/41024/676a52aeF155b4d60/f2ea3f6b73f26e20.jpg',
-  
-]
+// 批量导入图片
+const images = import.meta.glob('@/assets/image/statusImages/*.png', { eager: true })
+const statusImages = Object.values(images).map(module => (module as any).default)
 
 const currentStatus = {
   description: `目前我们的API框架存在以下几个主要问题：
-  1. 接口响应时间较长，平均响应时间超过500ms
-  2. 系统架构较为老旧，维护成本高
-  3. 缺乏统一的错误处理机制
-  4. 文档更新不及时，团队协作效率低
-  `,
-  keyPoints: [
-    {
-      timestamp: '2023 Q4',
-      content: '系统负载持续增加，响应时间开始显著下降'
-    },
-    {
-      timestamp: '2024 Q1',
-      content: '维护成本增加50%，开发效率降低'
-    },
-    {
-      timestamp: '2024 Q2',
-      content: '新功能开发周期延长，平均交付时间增加一倍'
-    }
-  ]
+  1. 不同项目拥有不同的分支，最初设计是为了支持不同项目的测试运行，但是受限于框架的架构，只能创建多个分支。
+  2. 维护成本较高，各个分支可能会有框架细节的差异，而其中的差异只有我自己知道，这意味着只有我才可以高效的维护这套API框架。
+  3. 无法自动的智能的运行指定的测试用例，只能运行提前设置好的测试用例范围，所以目前可以看到我们如果需要运行Zephyr Scale里指定的测试用例需要我们把测试用例拆成单个，这样也增加了维护成本。
+  4. 目前只有测试自动化在使用这套框架，如果添加web操作界面，提供更加简单的使用方法可以让人人都上手这套框架。
+  `
 }
 
 const improvementNecessity = [
   {
-    title: '性能提升',
-    content: '通过改进架构，预期可将响应时间降低到200ms以内'
-  },
-  {
     title: '维护成本',
-    content: '新架构采用模块化设计，预计可降低40%维护成本'
+    content: '通过优化框架，维护API测试用例的成本降低了，我们不再需要为每个项目创建不同的分支，只需要维护一个分支即可。 '
   },
   {
-    title: '开发效率',
-    content: '统一接口规范和文档管理，提高团队协作效率'
+    title: '智能选择测试用例',
+    content: '通过优化框架，我们可以智能的选择测试用例，不再需要手动选择测试用例，只需要设置好测试用例的范围，框架就会自动选择测试用例。'
   },
   {
-    title: '用户体验',
-    content: '提供更稳定、快速的API服务，提升用户满意度'
+    title: '自动切换Runner',
+    content: '通过优化框架，我们可以根据环境自动切换Runner，不再需要手动创建多个Runner'
+  },
+  {
+    title: '操作界面',
+    content: '未来可以添加spring boot来为我们的测试框架提供web操作界面，这样人人都可以通过web来启动测试。'
   }
 ]
 </script>
@@ -152,8 +128,9 @@ h1 {
   backdrop-filter: blur(10px);
   height: calc(90vh - 100px);
   overflow-y: auto;
-  padding: 20px;
+  padding: 2rem;
   max-height: 800px;
+  letter-spacing: 0.5px;
 }
 
 h2 {
@@ -168,22 +145,36 @@ h3 {
 
 .description {
   white-space: pre-line;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 2;
+  font-size: 1.1rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 1rem 0;
 }
 
 .image-container {
   display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 1.5rem;
+  margin: 2rem 0;
   flex-wrap: wrap;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
 }
 
 .status-image {
   width: calc(50% - 0.5rem);
-  height: 150px;
-  border-radius: 8px;
+  height: 200px;
+  border-radius: 12px;
   object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.status-image:hover {
+  transform: scale(1.02);
 }
 
 .improvement-list {
