@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ElCard, ElCol, ElDivider, ElIcon, ElRow} from 'element-plus'
-import {Document, Edit} from '@element-plus/icons-vue'
+import {ElCard,ElDivider, ElIcon} from 'element-plus'
+import {Edit} from '@element-plus/icons-vue'
 </script>
 
 <template>

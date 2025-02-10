@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ElCard, ElSteps, ElStep, ElIcon } from 'element-plus'
-import { Connection, Select, Monitor } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import {ElIcon} from 'element-plus'
+import {Connection, Select, Monitor} from '@element-plus/icons-vue'
+import {ref} from 'vue'
 
 const positionX = ref(350)
 const positionY = ref(220)
@@ -41,16 +41,16 @@ const steps = [
 
         <div class="roadmap-section">
           <div class="timeline-container">
-            <div 
-              v-for="(step, index) in steps" 
-              :key="index"
-              class="timeline-item"
-              :class="{ 'completed': step.status === 'success' }"
+            <div
+                v-for="(step, index) in steps"
+                :key="index"
+                class="timeline-item"
+                :class="{ 'completed': step.status === 'success' }"
             >
               <div class="timeline-header">
                 <div class="timeline-icon">
                   <el-icon>
-                    <component :is="step.icon" />
+                    <component :is="step.icon"/>
                   </el-icon>
                 </div>
                 <div class="timeline-title">
@@ -245,18 +245,18 @@ h1 {
   top: 50%;
   width: 3.5rem;
   height: 2px;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.05)
+  background: linear-gradient(90deg,
+  rgba(255, 255, 255, 0.2),
+  rgba(255, 255, 255, 0.05)
   );
   transform: translateY(-50%);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .timeline-item.completed:not(:last-child) .timeline-header::after {
-  background: linear-gradient(90deg, 
-    rgba(46, 204, 113, 0.4),
-    rgba(46, 204, 113, 0.1)
+  background: linear-gradient(90deg,
+  rgba(46, 204, 113, 0.4),
+  rgba(46, 204, 113, 0.1)
   );
   box-shadow: 0 0 12px rgba(46, 204, 113, 0.2);
 }
@@ -283,7 +283,7 @@ h1 {
   color: #fff;
   transition: all 0.3s ease;
   transform: translateY(0);
-  
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -296,7 +296,7 @@ h1 {
   gap: 0.8rem;
   color: #ff6b6b;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
-  
+
   .el-icon {
     font-size: 1.4em;
     background: linear-gradient(45deg, #ff6b6b, #feca57);
@@ -317,17 +317,21 @@ h1 {
   color: white;
   transition: all 0.3s ease;
   padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1.5rem, 2vw, 2rem);
+
   &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
   }
+
   &.el-button--primary {
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border: none;
+
     &:hover:not(:disabled) {
       opacity: 0.9;
     }
   }
+
   &:disabled {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.1);
@@ -375,11 +379,11 @@ h1 {
     max-width: 350px;
     min-width: 300px;
   }
-  
+
   .timeline-title h3 {
     font-size: 1.3rem;
   }
-  
+
   .timeline-content p {
     font-size: 1rem;
   }

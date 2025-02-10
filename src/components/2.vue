@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ElCard, ElImage, ElDivider, ElTimeline, ElTimelineItem, ElCollapse, ElCollapseItem } from 'element-plus'
+import { ElCard, ElImage } from 'element-plus'
 
 // 批量导入图片
 const images = import.meta.glob('@/assets/image/statusImages/*.png', { eager: true })
